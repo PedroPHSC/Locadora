@@ -44,10 +44,10 @@ public class FilmesDAO {
             
             ResultSet rs = stmt.getGeneratedKeys();
 
-        // Busca a chave gerada (id)
-        if (rs.next()) {
-             f.setCodigo(rs.getInt(1));
-         } 
+            // Busca a chave gerada (id)
+            if (rs.next()) {
+                f.setCodigo(rs.getInt(1));
+            } 
 
             conexao.commit();
             resultado = true;
@@ -71,24 +71,3 @@ public class FilmesDAO {
         return resultado;
     }
 }
-
-//    public boolean inserirEndereco(Cliente cliente) throws SQLException {
-//        //não coloquei try-catch para se der erro, 
-//        //o erro será tratado no método inserirCliente;
-//        boolean resultado = false;
-//        
-//        String sql = "insert into enderecos (rua, bairro, codigo_cliente) values (?,?,?)";
-//
-//        PreparedStatement stmt = conexao.prepareStatement(sql);
-//        stmt.setString(1, cliente.getEndereco().getRua());
-//        stmt.setString(2, cliente.getEndereco().getBairro());
-//        stmt.setInt(3, cliente.getCodigo());
-//
-//        stmt.executeUpdate();
-//        resultado = true;
-//        
-//        stmt.close();                
-//        return resultado;
-//    }
-//
-//}
