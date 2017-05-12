@@ -16,16 +16,20 @@ import javax.swing.JOptionPane;
  * @author sala305b
  */
 public class ConnectionFactory {
-    public static Connection getConnection() {
-        Connection conexao = null;
-        try {
-            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/locadora", "root", "123456");
-            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com Banco de Dados: " + ex.getMessage());
-        }
+    public static Connection getConnection() throws SQLException, ClassNotFoundException{
+                Connection conn = null;
         
-        return conexao;
+        String drive = "com.mysql.jdbc.Driver";
+        String banco = "jdbc:mysql://localhost:3306/locadora";
+        String usuarioBD = "root";
+        String senha = "123456";
         
-    }    
+        try { 
+            Class.forName(drive);
+            conn = DriverManager.getConnection(banco, usuarioBD, senha);
+        } catch (SQLException | ClassNotFoundException e) { 
+    		throw e; 
+        } 
+        return conn;
+    }  
 }

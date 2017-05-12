@@ -3,8 +3,10 @@
     Created on : 12/05/2017, 08:14:48
     Author     : sala308b
 --%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean class="persistencia.GeneroDAO" id="dao"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,18 +14,22 @@
         <title>Cadastro de Filmes</title>
     </head>
     <body>
-        <h1>Cadastrar Produto</h1>
+        <h1>Cadastrar Filme</h1>
         <hr>
         <a href="javascript:history.back()">Voltar</a><br><br>
         <form action="ProdutoIncluir">
             <label>Título:</label><br>
-            <input type="text" name="txtTitulo"><br>
-            <label>Gênero</label><br>
-            <input type="text" name="txtQtd"><br>
+            <input type="text" minlength="3" name="txtTitulo"><br><br>
+            <select name="Genero">
+            <option value="Select">Selecione um Genero</option>
+            <c:forEach items="${dao.listar()}" var="genero">            
+                <option value="${genero.codigo}">${genero.nome}</option>           
+            </c:forEach>
+            </select><br><br>
             <label>Sinopse:</label><br>
             <input type="text" name="txtSinopse"><br>
             <label>Diretor:</label><br>
-            <input type="text" name="txtDiretor"><br>
+            <input type="text" minlength="5" name="txtDiretor"><br>
             <label>Ano de Lançamento:</label><br>
             <input type="number" min="1895" max="3000" name="txtAnoLancamento"><br>
             <label>Status:</label><br>

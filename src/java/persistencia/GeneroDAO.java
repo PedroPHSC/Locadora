@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import modelo.Genero;
 
@@ -11,7 +13,7 @@ public class GeneroDAO {
 
     private Connection conexao;
 
-    public GeneroDAO() {
+    public GeneroDAO() throws SQLException, ClassNotFoundException {
         conexao = ConnectionFactory.getConnection();
     }
 
@@ -52,5 +54,41 @@ public class GeneroDAO {
             }
         }
         return resultado;
+    }
+    
+    public static ArrayList listar() throws SQLException, ClassNotFoundException{
+        
+        Connection conn = null;
+        PreparedStatement  preparedStatement = null;
+        ResultSet rs = null;
+        String SQL = "";
+        ArrayList<Genero> lista = new ArrayList<>();
+                
+        // Obtem conexao com BD
+        conn = ConnectionFactory.getConnection();
+        
+        // Comando SQL 
+        SQL = "SELECT * FROM generos ";
+
+        preparedStatement = conn.prepareStatement(SQL);
+
+        // Para buscar informações
+        rs = preparedStatement.executeQuery();   
+
+        // Verifica se possui dados
+        while (rs.next()) {
+            
+            Genero g = new Genero();
+            
+            g.setCodigo(rs.getInt("codigo"));
+            g.setNome(rs.getString("nome"));
+            
+            lista.add(g);
+         } 
+        
+        // Fechar conexao
+        conn.close();
+        
+        return lista;
     }
 }

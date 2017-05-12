@@ -12,6 +12,7 @@ package modelo;
 public class Genero {
     private String nome;
     private String descricao;
+    private int codigo;
 
     public String getNome() {
         return nome;
@@ -28,6 +29,15 @@ public class Genero {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
     
+   
     
 }

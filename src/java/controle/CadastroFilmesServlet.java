@@ -12,6 +12,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Filmes;
+import persistencia.FilmesDAO;
+import utilidades.PersonalizarMsgErro;
 
 /**
  *
@@ -32,6 +35,33 @@ public class CadastroFilmesServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String msgErro = "";
+        
+        String titulo = request.getParameter("txtTitulo");
+        String genero = request.getParameter("txtGenero");
+        String sinopse = request.getParameter("txtSinopse");
+        String diretor = request.getParameter("txtDiretor");
+        String anoLancamento = request.getParameter("txtAnoLancamento");
+        String status = request.getParameter("txtStatus");
+        
+        if(genero.equals("")){
+            msgErro = "Um filme não pode ser cadastrado sem um Gênero";
+        }
+        
+        Filmes f = new Filmes();
+        f.setTitulo(titulo);
+        //f.set();
+        
+        try{
+            FilmesDAO filmesDao = new FilmesDAO();
+            filmesDao.inserirFilmes(f);
+        }catch (Exception e){
+            msgErro = PersonalizarMsgErro.getMensagem(e.getMessage());
+        }
+        
+        
+        
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
