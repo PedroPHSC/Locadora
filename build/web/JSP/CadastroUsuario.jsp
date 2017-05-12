@@ -19,11 +19,12 @@
             <label>Nome:</label><br>
             <input type="text" name="txtNome"><br>
             <label>Login:</label><br>
-            <input type="text" name="txtLogin"><br>
+            <input type="text" minlength="5" name="txtLogin"><br>
             <label>Senha:</label><br>
-            <input type="password" name="txtSenha"><br><br>
+            <input type="password" minlength="6" maxlength="6" name="txtSenha"><br><br>
             <label>Perfil:</label><br>
             <select name="Perfil">
+                <option value="Select">Selecione um perfil</option>>
                 <option value="ADM">Administrador</option>
                 <option value="FUNC">Funcionário</option>
             </select><br><br>
