@@ -17,7 +17,7 @@
         <h1>Cadastrar Filme</h1>
         <hr>
         <a href="javascript:history.back()">Voltar</a><br><br>
-        <form action="ProdutoIncluir">
+        <form action="../CadastroFilmes">
             <label>Título:</label><br>
             <input type="text" minlength="3" name="txtTitulo"><br><br>
             <select name="Genero">

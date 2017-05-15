@@ -15,7 +15,7 @@
         <h1>Cadastrar Gêneros</h1>
         <hr>
         <a href="javascript:history.back()">Voltar</a><br><br>
-        <form action="CadastroGenero">
+        <form action="../CadastroGenero">
             <label>Nome:</label><br>
             <input type="text" minlength="4" name="txtNome"><br>
             <label>Descrição:</label><br>

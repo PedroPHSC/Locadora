@@ -14,6 +14,13 @@ public class Genero {
     private String descricao;
     private int codigo;
 
+    public Genero(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public Genero() {
+    }
+
     public String getNome() {
         return nome;
     }

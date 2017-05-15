@@ -14,12 +14,12 @@ import java.util.Date;
 public class Filmes {
    private int codigo;
    private String titulo;
-   private int codGenero;
+   private Genero Genero;
    private String sinopse;
    private String diretor;
    private int anoLancamento;
    private String status;
-   private String usuarioCadastro;
+   private Usuario usuarioCadastro;
    private Date datahoraCadastro;
 
     public int getCodigo() {
@@ -38,12 +38,12 @@ public class Filmes {
         this.titulo = titulo;
     }
 
-    public int getCodGenero() {
-        return codGenero;
+    public Genero getGenero() {
+        return Genero;
     }
 
-    public void setCodGenero(int codGenero) {
-        this.codGenero = codGenero;
+    public void setGenero(Genero Genero) {
+        this.Genero = Genero;
     }
 
     public String getSinopse() {
@@ -78,14 +78,6 @@ public class Filmes {
         this.status = status;
     }
 
-    public String getUsuarioCadastro() {
-        return usuarioCadastro;
-    }
-
-    public void setUsuarioCadastro(String usuarioCadastro) {
-        this.usuarioCadastro = usuarioCadastro;
-    }
-
     public Date getDatahoraCadastro() {
         return datahoraCadastro;
     }
@@ -93,6 +85,12 @@ public class Filmes {
     public void setDatahoraCadastro(Date datahoraCadastro) {
         this.datahoraCadastro = datahoraCadastro;
     }
-   
-   
+
+    public Usuario getUsuarioCadastro() {
+        return usuarioCadastro;
+    }
+
+    public void setUsuarioCadastro(Usuario usuarioCadastro) {
+        this.usuarioCadastro = usuarioCadastro;
+    }
 }

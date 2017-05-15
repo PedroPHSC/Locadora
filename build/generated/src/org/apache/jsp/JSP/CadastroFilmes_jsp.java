@@ -71,12 +71,12 @@ public final class CadastroFilmes_jsp extends org.apache.jasper.runtime.HttpJspB
       out.write("        <title>Cadastro de Filmes</title>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
-      out.write("        <h1>Cadastrar Produto</h1>\n");
+      out.write("        <h1>Cadastrar Filme</h1>\n");
       out.write("        <hr>\n");
       out.write("        <a href=\"javascript:history.back()\">Voltar</a><br><br>\n");
-      out.write("        <form action=\"ProdutoIncluir\">\n");
+      out.write("        <form action=\"../CadastroFilmes\">\n");
       out.write("            <label>Título:</label><br>\n");
-      out.write("            <input type=\"text\" minlength=\"3\" name=\"txtTitulo\"><br>\n");
+      out.write("            <input type=\"text\" minlength=\"3\" name=\"txtTitulo\"><br><br>\n");
       out.write("            <select name=\"Genero\">\n");
       out.write("            <option value=\"Select\">Selecione um Genero</option>\n");
       out.write("            ");
@@ -118,7 +118,7 @@ public final class CadastroFilmes_jsp extends org.apache.jasper.runtime.HttpJspB
     org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
     _jspx_th_c_forEach_0.setPageContext(_jspx_page_context);
     _jspx_th_c_forEach_0.setParent(null);
-    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${dao.listar}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${dao.listar()}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
     _jspx_th_c_forEach_0.setVar("genero");
     int[] _jspx_push_body_count_c_forEach_0 = new int[] { 0 };
     try {

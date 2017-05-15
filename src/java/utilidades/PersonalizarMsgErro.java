@@ -13,7 +13,7 @@ public class PersonalizarMsgErro {
     
     public static String getMensagem(String erro){
         if(erro.contains("Duplicate entry")){
-            return "Já existe um registro cadastrado.";
+            return "Já existe um filme cadastrado com esse título.";
         }
         
         return erro;

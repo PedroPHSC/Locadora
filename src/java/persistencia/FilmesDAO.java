@@ -21,7 +21,7 @@ public class FilmesDAO {
 
         boolean resultado = false;
 
-        String sql = "INSERT INTO filmes (titulo, codGenero, sinopse, diretor, anoLancamento, status, usuarioCadastro, datahoraCadastro)"
+        String sql = "INSERT INTO filmes (titulo, cod_genero, sinopse, diretor, ano_lancamento, status, usuario_cadastro, datahora_cadastro)"
                 + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
@@ -30,12 +30,12 @@ public class FilmesDAO {
             PreparedStatement stmt = conexao.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             
             stmt.setString(1, f.getTitulo());
-            stmt.setInt(2, f.getCodGenero());
+            stmt.setInt(2, f.getGenero().getCodigo());
             stmt.setString(3, f.getSinopse());
             stmt.setString(4, f.getDiretor());
             stmt.setInt(5, f.getAnoLancamento());
             stmt.setString(6, f.getStatus());
-            stmt.setString(7, f.getUsuarioCadastro());
+            stmt.setString(7, f.getUsuarioCadastro().getLogin());
             Timestamp dataAux = new Timestamp(f.getDatahoraCadastro().getTime());
             stmt.setTimestamp(8, dataAux);
             

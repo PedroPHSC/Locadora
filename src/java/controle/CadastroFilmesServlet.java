@@ -7,12 +7,15 @@ package controle;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Filmes;
+import modelo.Genero;
+import modelo.Usuario;
 import persistencia.FilmesDAO;
 import utilidades.PersonalizarMsgErro;
 
@@ -38,19 +41,29 @@ public class CadastroFilmesServlet extends HttpServlet {
         String msgErro = "";
         
         String titulo = request.getParameter("txtTitulo");
-        String genero = request.getParameter("txtGenero");
+        String codGenero = request.getParameter("Genero");
         String sinopse = request.getParameter("txtSinopse");
         String diretor = request.getParameter("txtDiretor");
-        String anoLancamento = request.getParameter("txtAnoLancamento");
-        String status = request.getParameter("txtStatus");
+        String anoLancamentoAux = request.getParameter("txtAnoLancamento");
+        String status = request.getParameter("Status");
         
-        if(genero.equals("")){
+        if(codGenero.equals("")){
             msgErro = "Um filme não pode ser cadastrado sem um Gênero";
-        }
+        }else{
+        Genero g = new Genero(Integer.parseInt(codGenero));
+        Usuario u = new Usuario("admin");
+        
+        int anoLancamento = Integer.parseInt(anoLancamentoAux);
         
         Filmes f = new Filmes();
         f.setTitulo(titulo);
-        //f.set();
+        f.setGenero(g);
+        f.setSinopse(sinopse);
+        f.setDiretor(diretor);
+        f.setAnoLancamento(anoLancamento);
+        f.setStatus(status);
+        f.setUsuarioCadastro(u);
+        f.setDatahoraCadastro(new Date());
         
         try{
             FilmesDAO filmesDao = new FilmesDAO();
@@ -58,19 +71,18 @@ public class CadastroFilmesServlet extends HttpServlet {
         }catch (Exception e){
             msgErro = PersonalizarMsgErro.getMensagem(e.getMessage());
         }
-        
-        
-        
+        response.sendRedirect("JSP/CadastroFilmes.jsp");
+        }
         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CadastroFilmesServlet</title>");            
+            out.println("<title>Algo inesperado aconteceu</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CadastroFilmesServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h2>Ocorreu um erro: " + msgErro + "</h2>");
             out.println("</body>");
             out.println("</html>");
         }
