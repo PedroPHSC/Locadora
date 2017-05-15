@@ -48,11 +48,11 @@ public class CadastroGeneroServlet extends HttpServlet {
           try{
             GeneroDAO generoDao = new GeneroDAO();
             generoDao.inserirGenero(g);
+            response.sendRedirect("JSP/CadastroGenero.jsp");
           }catch(Exception e){
             msgErro = "Falha ao inserir o Gênero";
           }
-        response.sendRedirect("JSP/CadastroFilmes.jsp");
-        
+                
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -62,6 +62,7 @@ public class CadastroGeneroServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h2>Ocorreu um erro: " + msgErro + "</h2>");
+            out.println("<a href=\"javascript:history.back()\">Voltar</a>");
             out.println("</body>");
             out.println("</html>");
         }

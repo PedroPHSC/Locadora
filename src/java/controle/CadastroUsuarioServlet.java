@@ -74,11 +74,10 @@ public class CadastroUsuarioServlet extends HttpServlet {
             try{
                 UsuarioDAO usuarioDao = new UsuarioDAO();
                 usuarioDao.inserirUsuario(u);
+                response.sendRedirect("JSP/CadastroUsuario.jsp");
             }catch(Exception e){
-                msgErro = "Falha ao inserir o usuário";
-            }
-            response.sendRedirect("JSP/CadastroUsuario.jsp");
-        
+                msgErro = "Falha ao inserir o usuário, nome de login já existe";
+            }        
         }
         
         try (PrintWriter out = response.getWriter()) {
@@ -89,7 +88,8 @@ public class CadastroUsuarioServlet extends HttpServlet {
             out.println("<title>Algo inesperado aconteceu</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h2>Ocorreu um erro: " + msgErro + "</h2>");
+            out.println("<h4>Ocorreu um erro: " + msgErro + "</h4>");
+            out.println("<a href=\"javascript:history.back()\">Voltar</a>");
             out.println("</body>");
             out.println("</html>");
         }

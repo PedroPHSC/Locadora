@@ -59,7 +59,7 @@ public class FilmesDAO {
             } catch (SQLException ex1) {
                JOptionPane.showMessageDialog(null,"Erro ao reverter a operação - " + ex1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
-            JOptionPane.showMessageDialog(null,"Erro ao inserir o cliente - " + ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Erro ao inserir o filme - " + ex.getMessage());
         } finally {
 
             try {

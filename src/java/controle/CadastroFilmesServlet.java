@@ -68,10 +68,10 @@ public class CadastroFilmesServlet extends HttpServlet {
         try{
             FilmesDAO filmesDao = new FilmesDAO();
             filmesDao.inserirFilmes(f);
+            response.sendRedirect("JSP/CadastroFilmes.jsp");
         }catch (Exception e){
             msgErro = PersonalizarMsgErro.getMensagem(e.getMessage());
         }
-        response.sendRedirect("JSP/CadastroFilmes.jsp");
         }
         
         try (PrintWriter out = response.getWriter()) {
@@ -83,6 +83,7 @@ public class CadastroFilmesServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h2>Ocorreu um erro: " + msgErro + "</h2>");
+            out.println("<a href=\"javascript:history.back()\">Voltar</a>");
             out.println("</body>");
             out.println("</html>");
         }
