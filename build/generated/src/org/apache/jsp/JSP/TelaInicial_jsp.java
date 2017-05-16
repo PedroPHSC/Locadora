@@ -54,6 +54,9 @@ public final class TelaInicial_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <body>       \n");
       out.write("        <h2>Locadora xFilmes</h2>\n");
       out.write("        <hr>\n");
+      out.write("        <div>");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${msgErro}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("</div>\n");
       out.write("        <form action=\"../Autenticar\">\n");
       out.write("        <label>Login: </label>\n");
       out.write("        <input type=\"text\" name=\"txtLogin\"><br><br>\n");

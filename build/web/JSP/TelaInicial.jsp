@@ -15,6 +15,7 @@
     <body>       
         <h2>Locadora xFilmes</h2>
         <hr>
+        <div>${msgErro}</div><br>
         <form action="../Autenticar">
         <label>Login: </label>
         <input type="text" name="txtLogin"><br><br>

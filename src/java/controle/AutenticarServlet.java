@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,11 +46,17 @@ public class AutenticarServlet extends HttpServlet {
         
         if(login != null && senha !=null){
             String senhaCriptografada = DigestUtils.sha512Hex(senha);
-                                            
+                                                       
             try {
                 //chamando o método buscar para verificar 
                 //se o usuário existe no banco de dados
                 Usuario autenticado = UsuarioDAO.buscar(login, senhaCriptografada);
+                
+                if(autenticado.getStatus().equals("Inativo")){
+                    request.setAttribute("msgErro", "Usuário Inativo");
+                    RequestDispatcher rd = request.getRequestDispatcher("JSP/TelaInicial.jsp");
+                    rd.forward(request, response);
+                }else{
 
                 if(autenticado != null){
                     // Informo ao servidor qual usuario autenticado
@@ -62,7 +69,7 @@ public class AutenticarServlet extends HttpServlet {
                     return;
 
                 }                
-                
+                }
             } catch (Exception ex) {
                 throw new ServletException(ex);
             } 
