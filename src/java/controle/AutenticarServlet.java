@@ -52,13 +52,19 @@ public class AutenticarServlet extends HttpServlet {
                 //se o usuário existe no banco de dados
                 Usuario autenticado = UsuarioDAO.buscar(login, senhaCriptografada);
                 
-                if(autenticado.getStatus().equals("Inativo")){
+                if(autenticado.getLogin().equals("")){
+                    request.setAttribute("msgErro", "Por favor digite seu login");
+                    RequestDispatcher rd = request.getRequestDispatcher("TelaInicial.jsp");
+                    rd.forward(request, response);  
+                }else if(autenticado.getSenha().equals("")){
+                    request.setAttribute("msgErro", "Por favor digite sua senha");
+                    RequestDispatcher rd = request.getRequestDispatcher("TelaInicial.jsp");
+                    rd.forward(request, response); 
+                }else if(autenticado.getStatus().equals("Inativo")){
                     request.setAttribute("msgErro", "Usuário Inativo");
                     RequestDispatcher rd = request.getRequestDispatcher("TelaInicial.jsp");
                     rd.forward(request, response);
-                }else{
-
-                if(autenticado != null){
+                }else if(autenticado != null){
                     // Informo ao servidor qual usuario autenticado
                     HttpSession session = request.getSession(true);
                     session.setAttribute("usuarioAutenticado", autenticado);
@@ -67,9 +73,7 @@ public class AutenticarServlet extends HttpServlet {
                     response.sendRedirect("PainelUsuario.jsp");
 
                     return;
-
-                }                
-                }
+                }                         
             } catch (Exception ex) {
                 throw new ServletException(ex);
             } 
