@@ -68,7 +68,7 @@ public class CadastroFilmesServlet extends HttpServlet {
         try{
             FilmesDAO filmesDao = new FilmesDAO();
             filmesDao.inserirFilmes(f);
-            response.sendRedirect("JSP/CadastroFilmes.jsp");
+            response.sendRedirect("CadastroFilmes.jsp");
         }catch (Exception e){
             msgErro = PersonalizarMsgErro.getMensagem(e.getMessage());
         }

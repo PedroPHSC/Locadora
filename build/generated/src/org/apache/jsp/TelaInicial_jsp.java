@@ -1,4 +1,4 @@
-package org.apache.jsp.JSP;
+package org.apache.jsp;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -57,7 +57,7 @@ public final class TelaInicial_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <div>");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${msgErro}", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("</div><br>\n");
-      out.write("        <form action=\"../Autenticar\">\n");
+      out.write("        <form action=\"Autenticar\">\n");
       out.write("        <label>Login: </label>\n");
       out.write("        <input type=\"text\" name=\"txtLogin\"><br><br>\n");
       out.write("        <label>Senha: </label>\n");

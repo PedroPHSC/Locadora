@@ -48,7 +48,7 @@ public class CadastroGeneroServlet extends HttpServlet {
           try{
             GeneroDAO generoDao = new GeneroDAO();
             generoDao.inserirGenero(g);
-            response.sendRedirect("JSP/CadastroGenero.jsp");
+            response.sendRedirect("CadastroGenero.jsp");
           }catch(Exception e){
             msgErro = "Falha ao inserir o Gênero";
           }

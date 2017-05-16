@@ -41,7 +41,7 @@ public class Permissao implements Filter{
         
         //Se o usuário não está logado redireciona para a página de login
         if(usuario.getPerfil().equals("FUNC")){
-            res.sendRedirect("JSP/PainelUsuario.jsp");
+            res.sendRedirect("PainelUsuario.jsp");
         }else{
             //passa pelo filtro e abre a url requisistada
             chain.doFilter(request, response);

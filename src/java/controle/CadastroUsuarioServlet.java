@@ -76,7 +76,7 @@ public class CadastroUsuarioServlet extends HttpServlet {
             try{
                 UsuarioDAO usuarioDao = new UsuarioDAO();
                 usuarioDao.inserirUsuario(u);
-                response.sendRedirect("JSP/CadastroUsuario.jsp");
+                response.sendRedirect("CadastroUsuario.jsp");
             }catch(Exception e){
                 msgErro = "Falha ao inserir o usuário, nome de login já existe";
             }        

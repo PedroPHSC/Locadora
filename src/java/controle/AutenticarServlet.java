@@ -54,7 +54,7 @@ public class AutenticarServlet extends HttpServlet {
                 
                 if(autenticado.getStatus().equals("Inativo")){
                     request.setAttribute("msgErro", "Usuário Inativo");
-                    RequestDispatcher rd = request.getRequestDispatcher("JSP/TelaInicial.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("TelaInicial.jsp");
                     rd.forward(request, response);
                 }else{
 
@@ -64,7 +64,7 @@ public class AutenticarServlet extends HttpServlet {
                     session.setAttribute("usuarioAutenticado", autenticado);
 
                     // Redireciona para uma pagina logada
-                    response.sendRedirect("JSP/PainelUsuario.jsp");
+                    response.sendRedirect("PainelUsuario.jsp");
 
                     return;
 
