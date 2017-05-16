@@ -5,10 +5,11 @@
         <group>
             <file>file:/C:/ProjetosGIT/Locadora/web/JSP/CadastroFilmes.jsp</file>
             <file>file:/C:/ProjetosGIT/Locadora/src/java/controle/CadastroFilmesServlet.java</file>
-            <file>file:/C:/ProjetosGIT/Locadora/src/java/persistencia/ConnectionFactory.java</file>
-            <file>file:/C:/ProjetosGIT/Locadora/src/java/modelo/Filmes.java</file>
+            <file>file:/C:/ProjetosGIT/Locadora/src/java/modelo/Usuario.java</file>
+            <file>file:/C:/ProjetosGIT/Locadora/src/java/controle/CadastroUsuarioServlet.java</file>
             <file>file:/C:/ProjetosGIT/Locadora/src/java/persistencia/FilmesDAO.java</file>
-            <file>file:/C:/ProjetosGIT/Locadora/src/java/persistencia/UsuarioDAO.java</file>
+            <file>file:/C:/ProjetosGIT/Locadora/src/java/controle/CadastroGeneroServlet.java</file>
+            <file>file:/C:/ProjetosGIT/Locadora/web/JSP/CadastroUsuario.jsp</file>
         </group>
     </open-files>
 </project-private>
