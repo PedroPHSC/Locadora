@@ -87,7 +87,6 @@ public class UsuarioDAO {
             
             u.setNome(rs.getString("nome"));
             u.setLogin(rs.getString("login"));
-            u.setSenha(rs.getString("senha"));
             u.setPerfil(rs.getString("perfil"));
             u.setStatus(rs.getString("status"));
             

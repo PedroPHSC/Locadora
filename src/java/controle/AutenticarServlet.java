@@ -5,24 +5,27 @@
  */
 package controle;
 
-import com.sun.xml.wss.impl.misc.DigestCertSelector;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Usuario;
 import org.apache.commons.codec.digest.DigestUtils;
 import persistencia.UsuarioDAO;
 
 /**
  *
- * @author sala308b
+ * @author sala304b
  */
-@WebServlet(name = "CadastroUsuarioServlet", urlPatterns = {"/CadastroUsuario"})
-public class CadastroUsuarioServlet extends HttpServlet {
+@WebServlet(name = "AutenticarServlet", urlPatterns = {"/Autenticar"})
+public class AutenticarServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,62 +39,49 @@ public class CadastroUsuarioServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String msgErro = "";
         
-        String nome = request.getParameter("txtNome");
-        String loginAux = request.getParameter("txtLogin");
-        String senhaAux = request.getParameter("txtSenha");
-        String perfil = request.getParameter("Perfil");
-        String status = request.getParameter("Status");
+        String login = request.getParameter("txtLogin");
+        String senha = request.getParameter("txtSenha");
         
-        String login = "";
-        String senha = "";
-        
-        if(nome.equals("")){
-            msgErro = "Por favor digite seu nome";
-        }else if(loginAux.contains(" ")){
-            msgErro = "Não é permitido o uso de espaço para login";
-        }else if (senhaAux.contains(" ")){
-            msgErro = "Não é permitido o uso de espaço para senha";
-        }else if(senhaAux.equals(loginAux)){
-            msgErro = "Não é permitido o uso do login como senha";
-        }else if (senhaAux.equals(nome)){
-            msgErro = "Não é permitido o uso do seu nome como senha";
-        }else{
-            try{
-                login = loginAux;
-                senha = DigestUtils.sha512Hex(senhaAux);
-            }catch (Exception e){
-                msgErro = "Login ou senha inválidos"; //
-            }
-            if(perfil.equals("Select")){
-                msgErro = "Nenhum perfil selecionado";
-            }else if(msgErro.isEmpty()){
-                Usuario u = new Usuario();
-                u.setNome(nome);
-                u.setLogin(login);
-                u.setSenha(senha);
-                u.setPerfil(perfil);
-                u.setStatus(status);
-            try{
-                UsuarioDAO usuarioDao = new UsuarioDAO();
-                usuarioDao.inserirUsuario(u);
-                response.sendRedirect("JSP/CadastroUsuario.jsp");
-            }catch(Exception e){
-                msgErro = "Falha ao inserir o usuário, nome de login já existe";
-            }        
-          }
+        if(login != null && senha !=null){
+            String senhaCriptografada = DigestUtils.sha512Hex(senha);
+                                            
+            try {
+                //chamando o método buscar para verificar 
+                //se o usuário existe no banco de dados
+                Usuario autenticado = UsuarioDAO.buscar(login, senhaCriptografada);
+
+                if(autenticado != null){
+                    // Informo ao servidor qual usuario autenticado
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("usuarioAutenticado", autenticado);
+
+                    // Redireciona para uma pagina logada
+                    response.sendRedirect("JSP/PainelUsuario.jsp");
+
+                    return;
+
+                }                
+                
+            } catch (Exception ex) {
+                throw new ServletException(ex);
+            } 
+
+            
         }
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Algo inesperado aconteceu</title>");            
+            out.println("<title>Servlet AutenticarServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h4>Ocorreu um erro: " + msgErro + "</h4>");
-            out.println("<a href=\"javascript:history.back()\">Voltar</a>");
+            out.println("<h1>Autenticação</h1>");
+            out.println("<hr>");
+            out.println("<a href=\"javascript:history.back()\">Voltar</a><br>");
+            out.println("<h3>Login ou Senha Incorretos!</h3>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -137,4 +127,3 @@ public class CadastroUsuarioServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-
