@@ -31,7 +31,7 @@
             <label>Diretor:</label><br>
             <input type="text" minlength="5" name="txtDiretor"><br>
             <label>Ano de Lançamento:</label><br>
-            <input type="number" min="1895" max="3000" name="txtAnoLancamento"><br>
+            <input type="number" min="1895" max="3000" name="txtAnoLancamento" value="1895"><br>
             <label>Status:</label><br>
             <input type="radio" name="Status" value="Ativo" checked="checked" />Ativo
             <input type="radio" name="Status" value="Inativo" />Inativo<br><br>

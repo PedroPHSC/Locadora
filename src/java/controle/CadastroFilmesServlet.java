@@ -61,6 +61,8 @@ public class CadastroFilmesServlet extends HttpServlet {
             msgErro = "Por favor indique o nome do diretor";
         }else if(diretorAux.length() < 5){
             msgErro = "Não é permitido nome menor que 5 caracteres";
+        }else if(anoLancamentoAux.isEmpty()){
+            msgErro = "Digite o ano de lançamento";
         }else{
         Genero g = new Genero(Integer.parseInt(codGenero));
         Usuario u = (Usuario) request.getSession().getAttribute("usuarioAutenticado");
