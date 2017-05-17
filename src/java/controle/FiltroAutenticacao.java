@@ -15,6 +15,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Usuario;
 
 /**
  *
@@ -35,14 +36,11 @@ public class FiltroAutenticacao implements Filter{
         //converte o ServletResponse em HttpServletResponse
         HttpServletResponse res = (HttpServletResponse) response;
         
-        //Pega o parametro usuarioAutenticado da sessão
-        String usuario = (String) req.getSession().getAttribute("usuarioAutenticado");
+        Usuario usuario = (Usuario) req.getSession().getAttribute("usuarioAutenticado");
         
-        //Se o usuário não está logado redireciona para a página de login
         if(usuario == null){
             res.sendRedirect("TelaInicial.jsp");
         }else{
-            //passa pelo filtro e abre a url requisistada
             chain.doFilter(request, response);
         }
         

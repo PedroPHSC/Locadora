@@ -47,11 +47,23 @@ public class CadastroFilmesServlet extends HttpServlet {
         String anoLancamentoAux = request.getParameter("txtAnoLancamento");
         String status = request.getParameter("Status");
         
-        if(codGenero.equals("")){
+        String diretorAux = diretor.replace(" ", "");
+        
+        if(titulo.isEmpty()){
+            msgErro = "Por favor digite o nome do filme";
+        }else if(titulo.trim().length() < 3){
+            msgErro = "Título não pode ser menor que 3 caracteres";
+        }else if(codGenero.equals("Select")){
             msgErro = "Um filme não pode ser cadastrado sem um Gênero";
+        }else if(sinopse.equals("")){
+            msgErro = "Por favor digite a sinopse do filme";
+        }else if(diretor.equals("")){
+            msgErro = "Por favor indique o nome do diretor";
+        }else if(diretorAux.length() < 5){
+            msgErro = "Não é permitido nome menor que 5 caracteres";
         }else{
         Genero g = new Genero(Integer.parseInt(codGenero));
-        Usuario u = new Usuario("admin");
+        Usuario u = (Usuario) request.getSession().getAttribute("usuarioAutenticado");
         
         int anoLancamento = Integer.parseInt(anoLancamentoAux);
         
@@ -68,7 +80,7 @@ public class CadastroFilmesServlet extends HttpServlet {
         try{
             FilmesDAO filmesDao = new FilmesDAO();
             filmesDao.inserirFilmes(f);
-            response.sendRedirect("CadastroFilmes.jsp");
+            response.sendRedirect("PainelUsuario.jsp");
         }catch (Exception e){
             msgErro = PersonalizarMsgErro.getMensagem(e.getMessage());
         }

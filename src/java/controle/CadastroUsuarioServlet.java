@@ -49,9 +49,9 @@ public class CadastroUsuarioServlet extends HttpServlet {
         
         if(nome.equals("")){
             msgErro = "Por favor digite seu nome";
-        }else if(loginAux.contains(" ")){
+        }else if(loginAux.contains(" ") || loginAux.isEmpty()){
             msgErro = "Não é permitido o uso de espaço para login";
-        }else if (senhaAux.contains(" ")){
+        }else if (senhaAux.contains(" ") || senhaAux.equals("")){
             msgErro = "Não é permitido o uso de espaço para senha";
         }else if(senhaAux.equals(loginAux)){
             msgErro = "Não é permitido o uso do login como senha";
@@ -76,7 +76,7 @@ public class CadastroUsuarioServlet extends HttpServlet {
             try{
                 UsuarioDAO usuarioDao = new UsuarioDAO();
                 usuarioDao.inserirUsuario(u);
-                response.sendRedirect("CadastroUsuario.jsp");
+                response.sendRedirect("PainelUsuario.jsp");
             }catch(Exception e){
                 msgErro = "Falha ao inserir o usuário, nome de login já existe";
             }        

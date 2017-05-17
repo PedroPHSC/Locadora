@@ -44,7 +44,7 @@ public class AutenticarServlet extends HttpServlet {
         String login = request.getParameter("txtLogin");
         String senha = request.getParameter("txtSenha");
         
-        if(login != null && senha !=null){
+        if(login != null && senha != null){
             String senhaCriptografada = DigestUtils.sha512Hex(senha);
                                                        
             try {
@@ -52,11 +52,13 @@ public class AutenticarServlet extends HttpServlet {
                 //se o usuário existe no banco de dados
                 Usuario autenticado = UsuarioDAO.buscar(login, senhaCriptografada);
                 
-                if(autenticado.getLogin().equals("")){
+                if(autenticado != null){
+                
+                if(login.isEmpty()){
                     request.setAttribute("msgErro", "Por favor digite seu login");
                     RequestDispatcher rd = request.getRequestDispatcher("TelaInicial.jsp");
                     rd.forward(request, response);  
-                }else if(autenticado.getSenha().equals("")){
+                }else if(senhaCriptografada.isEmpty()){
                     request.setAttribute("msgErro", "Por favor digite sua senha");
                     RequestDispatcher rd = request.getRequestDispatcher("TelaInicial.jsp");
                     rd.forward(request, response); 
@@ -64,7 +66,7 @@ public class AutenticarServlet extends HttpServlet {
                     request.setAttribute("msgErro", "Usuário Inativo");
                     RequestDispatcher rd = request.getRequestDispatcher("TelaInicial.jsp");
                     rd.forward(request, response);
-                }else if(autenticado != null){
+                }else{
                     // Informo ao servidor qual usuario autenticado
                     HttpSession session = request.getSession(true);
                     session.setAttribute("usuarioAutenticado", autenticado);
@@ -73,7 +75,8 @@ public class AutenticarServlet extends HttpServlet {
                     response.sendRedirect("PainelUsuario.jsp");
 
                     return;
-                }                         
+                }     
+                }
             } catch (Exception ex) {
                 throw new ServletException(ex);
             } 

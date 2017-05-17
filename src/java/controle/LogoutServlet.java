@@ -6,23 +6,19 @@
 package controle;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Genero;
-import modelo.Usuario;
-import persistencia.GeneroDAO;
-import persistencia.UsuarioDAO;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author sala308b
+ * @author sala304b
  */
-@WebServlet(name = "CadastroGeneroServlet", urlPatterns = {"/CadastroGenero"})
-public class CadastroGeneroServlet extends HttpServlet {
+@WebServlet(name = "LogoutServlet", urlPatterns = {"/Logout"})
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,39 +32,15 @@ public class CadastroGeneroServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String msgErro = "";
         
-        String nome = request.getParameter("txtNome");
-        String descricao = request.getParameter("txtDescricao");
+        // Busca a sessao
+        HttpSession session = request.getSession(true);
         
-        Genero g = new Genero();
-        g.setNome(nome);
-        g.setDescricao(descricao);
+        // Libera a sessao do servidor
+        session.invalidate();
         
-        if(nome.equals("") || nome.contains(" ")){
-            msgErro = "Não é permitido o uso de espaço para cadastro de gênero";
-        }else{
-          try{
-            GeneroDAO generoDao = new GeneroDAO();
-            generoDao.inserirGenero(g);
-            response.sendRedirect("PainelUsuario.jsp");
-          }catch(Exception e){
-            msgErro = "Falha ao inserir o Gênero";
-          }
-        }     
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Algo inesperado aconteceu</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h2>Ocorreu um erro: " + msgErro + "</h2>");
-            out.println("<a href=\"javascript:history.back()\">Voltar</a>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        response.sendRedirect("TelaInicial.jsp");        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
