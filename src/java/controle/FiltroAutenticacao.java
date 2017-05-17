@@ -22,7 +22,7 @@ import modelo.Usuario;
  * @author sala304b
  */
 
-@WebFilter(filterName = "FiltroAutenticacao", urlPatterns = {"/PainelUsuario.jsp"})
+@WebFilter(filterName = "FiltroAutenticacao", urlPatterns = {"/PainelUsuario.jsp", "/CadastroUsuario", "/CadastroFilmes", "/CadastroGeneros"})
 public class FiltroAutenticacao implements Filter{
 
     @Override

@@ -47,13 +47,13 @@ public class CadastroGeneroServlet extends HttpServlet {
         
         if(nome.equals("") || nome.contains(" ")){
             msgErro = "Não é permitido o uso de espaço para cadastro de gênero";
-        }else{
+        }else if(){
           try{
             GeneroDAO generoDao = new GeneroDAO();
             generoDao.inserirGenero(g);
             response.sendRedirect("PainelUsuario.jsp");
           }catch(Exception e){
-            msgErro = "Falha ao inserir o Gênero";
+            msgErro = "Não foi possivel cadastrar o genero.";
           }
         }     
         try (PrintWriter out = response.getWriter()) {
